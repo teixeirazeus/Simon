@@ -201,8 +201,80 @@ getHeap:
 	movwf 0x25
 	return
 
+b00:
+;retorna 0 em x28
+movlw .0
+movwf 0x28
+goto endb
 
 
+b01:
+;retorna 1 em x28
+movlw .1
+movwf 0x28
+goto endb
+
+
+b10:
+;retorna 2 em x28
+movlw .2
+movwf 0x28
+goto endb
+
+
+b11:
+;retorna 3 em x28
+movlw .3
+movwf 0x28
+goto endb
+
+
+entrada:
+	; PA 0x05
+		; BIT 	BOTAO
+		; 0  	00
+		; 1		01
+		; 2		10
+		; 3 	11
+	;retorno em x28
+	clrf 0x28
+
+	entradaLoop:
+		;Botão 00
+		btfsc 0x05, 0
+		goto b00
+	
+		;Botão 01
+		btfsc 0x05, 0
+		goto b01
+	
+		;Botão 10
+		btfsc 0x05, 0
+		goto b10
+	
+		;Botão 11
+		btfsc 0x05, 0
+		goto b11
+	goto entradaLoop
+
+	endb
+	
+	return
+
+gameover:
+		bsf     0x06,1
+		bsf     0x06,2
+		bsf     0x06,3
+		bsf     0x06,4
+goto gameover
+
+
+win:
+	call acendeled0	
+	call acendeled1	
+	call acendeled2	
+	call acendeled3	
+goto win		
 
 
 main:
@@ -280,13 +352,21 @@ main:
 			movf 0x27, 0
 			movwf 0x25
 			call getHeap
-			;retorna x26
-			;ESPERA ENTRAR CORRESPONDENTE A X26
-			;
-			
+			;retorna x26, numero no vetor
+
+			call entrada
+			;retorna x28, numero apertado
+
+			;x26 == x28?, o jogador apertou o botão certo?
+			movf 0x26, 0
+			subwf 0x28, 0
+
+			btfss 0x03, 2	;são igual?
+			goto gameOver			
+			nop	;jogador acertou, continua o loop
 			
 			;if x27 - x24 = 0, se x27 já passou por todos os indices do nivel x24
-			movf 0x24
+			movf 0x24, 0
 			subwf 0x27, 0
 
 		btfss 0x03, 2	;são igual?, bit z
@@ -304,7 +384,7 @@ main:
 		goto loopGame
 
 	;ZEROU A JOGO
-
+	goto win
 		
 	
 	goto main
