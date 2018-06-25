@@ -404,6 +404,8 @@ main:
 
 inter:  btfss   0x0b,1      ; if (INTF == 1) SALT
         goto    inttmr1
+
+
 intext: bcf     0x0b,1      ; Apaga a flag INT EXT. -> RB0 (0x06,0)
         movf    0x0e,0
         movwf   0x22        ;0x22 = tmr1Low
@@ -411,7 +413,7 @@ intext: bcf     0x0b,1      ; Apaga a flag INT EXT. -> RB0 (0x06,0)
         movf    0x0f,0
         movwf   0x23        ;0x23 = tmr1High
        
-        bcf     0x10,0      ; T1ON = 0 -> T1CON (0x10,0) DESLIGA O TMR1
+        ;bcf     0x10,0      ; T1ON = 0 -> T1CON (0x10,0) DESLIGA O TMR1
        
         bsf     0x20, 0     ;Booleano do botao start
        
@@ -421,7 +423,7 @@ inttmr1:    bcf     0x0c,0  ; Apaga a flag TMR1IF -> PIR1 (0x0c,0)
             btfss   0x30,0  ; if (contarRestoDeTempo = 1) SALT
             goto 	contarestotmr1
             clrf    0x06    ; clear no PORT B -> Apaga todos os leds
-            bcf     0x10,0      ; T1ON = 0 -> T1CON (0x10,0) DESLIGA O TMR1
+            ;bcf     0x10,0      ; T1ON = 0 -> T1CON (0x10,0) DESLIGA O TMR1
             bsf     0x30,1  ; Retorna verdadeiro para o loop de leds
             retfie
            
