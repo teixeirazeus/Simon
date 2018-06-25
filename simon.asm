@@ -208,6 +208,8 @@ b00:
 ;retorna 0 em x28
 movlw .0
 movwf 0x28
+btfsc 0x05, 0;segura botao
+goto b00
 goto endb
 
 
@@ -215,6 +217,8 @@ b01:
 ;retorna 1 em x28
 movlw .1
 movwf 0x28
+btfsc 0x05, 1;segura botao
+goto b01
 goto endb
 
 
@@ -222,6 +226,8 @@ b10:
 ;retorna 2 em x28
 movlw .2
 movwf 0x28
+btfsc 0x05, 2;segura botao
+goto b10
 goto endb
 
 
@@ -229,6 +235,8 @@ b11:
 ;retorna 3 em x28
 movlw .3
 movwf 0x28
+btfsc 0x05, 3;segura botao
+goto b11
 goto endb
 
 
