@@ -374,7 +374,7 @@ main:
 
 			btfss 0x03, 2	;são igual?
 			goto gameOver			
-			nop	;jogador acertou, continua o loop
+			;nop	;jogador acertou, continua o loop
 			
 			;if x27 - x24 = 0, se x27 já passou por todos os indices do nivel x24
 			movf 0x24, 0
