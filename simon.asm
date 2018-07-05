@@ -294,9 +294,6 @@ main:
 	btfss 0x20, 0; se o botao de start for apertado na primeira vez
 	goto lopstart
 
-	;Usar ?	
-	bsf 0x20, 7;jumper
-
 	;0x24 Nivel do Jogo começa em zero
 	clrf 0x24
 
