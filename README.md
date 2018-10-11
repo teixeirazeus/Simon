@@ -1,2 +1,2 @@
-# Simon-game-asm
+# Simon
 PIC16F877
