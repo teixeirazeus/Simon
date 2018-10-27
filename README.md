@@ -1,2 +1,3 @@
 # Simon
-PIC16F877
+
+![alt text](https://i.imgur.com/yu8pTe3.jpg)
